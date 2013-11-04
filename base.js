@@ -1,28 +1,42 @@
+var cal_list = {
+  cal_1 : "src=email.nchu.edu.tw_g97uemkjpt68d8su5g8dsjnbi0@group.calendar.google.com&color=%23B1440E&",
+  cal_2 : "src=email.nchu.edu.tw_0er204ue8p81vfe22vn1qja6k0@group.calendar.google.com&color=%23B1440E&",
+  cal_3 : "src=email.nchu.edu.tw_kgjoa8u95tpju1vcclic8lqpv0@group.calendar.google.com&color=%23B1440E&",
+  cal_4 : "src=email.nchu.edu.tw_gfisp3ah88t5d9ue51n1a5l5e4@group.calendar.google.com&color=%23B1440E&",
+  cal_5 : "src=email.nchu.edu.tw_5ror2k98ics8okjs6d5kvd2h88@group.calendar.google.com&color=%23B1440E&",
+  cal_6 : "src=email.nchu.edu.tw_qgo0r638m2oof342e1ak0k76ks@group.calendar.google.com&color=%23B1440E&",
+  cal_7 : "src=email.nchu.edu.tw_coerb69lquagpvcvrr6ljlb85k@group.calendar.google.com&color=%23B1440E&"
+};
+
+
 $('.cal').click(function() {
 
-  var src = $('#calendar').attr('src');
-  src = src.replace('ctz=Asia/Taipei', '');
-  
+  var mainSrc, calRef, calNo;
+  mainSrc = $('#calendar').attr('src').replace('ctz=Asia/Taipei', '');
+  calNo = $(this).attr('mult-cal');
+  calRef = cal_list[calNo];
+
+
   if ($(this).hasClass('btn-success')) {
-    src = src.replace($(this).attr('src'), '');
+    mainSrc = mainSrc.replace(calRef, '');
     $(this).removeClass('btn-success');
     $(this).addClass('btn-default');  
   }
   else {
-    src = src + $(this).attr('src') + '&';
+    mainSrc = mainSrc + calRef;
     $(this).removeClass('btn-default');
     $(this).addClass('btn-success');  
   }
+
+  mainSrc = mainSrc + 'ctz=Asia/Taipei';
   
-  src = src + 'ctz=Asia/Taipei';
-  
-  $('#calendar').attr('src',src);
+  $('#calendar').attr('src', mainSrc);
   
   
 });
 
 
-$('#cancel_all').click(function() {
+$('#cal_cancel_all').click(function() {
   $('#calendar').attr('src','https://www.google.com/calendar/embed?ctz=Asia/Taipei');
 
   $('.cal').each(function(){
@@ -34,10 +48,10 @@ $('#cancel_all').click(function() {
 
 });
 
-$('#choose_all').click(function() {
+$('#cal_choose_all').click(function() {
   
-  var src = 'https://www.google.com/calendar/embed?ctz=Asia/Taipei'
-  src = src.replace('ctz=Asia/Taipei', '');
+  var mainSrc, calNo, calRef;
+  mainSrc = 'https://www.google.com/calendar/embed?';
   
   $('.cal').each(function(){
     if ($(this).hasClass('btn-default')) {
@@ -45,11 +59,16 @@ $('#choose_all').click(function() {
       $(this).addClass('btn-success');  
     }  
 
-    src = src + $(this).attr('src') + '&';
+    calNo   = $(this).attr('mult-cal');
+    calRef  = cal_list[calNo];
+    mainSrc = mainSrc + calRef;
   });
   
+  mainSrc = mainSrc + 'ctz=Asia/Taipei';
   
-  src = src + 'ctz=Asia/Taipei';
-  
-  $('#calendar').attr('src',src);
+  $('#calendar').attr('src', mainSrc);
 });
+
+
+
+
