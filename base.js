@@ -1,12 +1,19 @@
-var cal_list = {
-  cal_1 : "src=email.nchu.edu.tw_g97uemkjpt68d8su5g8dsjnbi0@group.calendar.google.com&color=%23B1440E&",
-  cal_2 : "src=email.nchu.edu.tw_0er204ue8p81vfe22vn1qja6k0@group.calendar.google.com&color=%23B1440E&",
-  cal_3 : "src=email.nchu.edu.tw_kgjoa8u95tpju1vcclic8lqpv0@group.calendar.google.com&color=%23B1440E&",
-  cal_4 : "src=email.nchu.edu.tw_gfisp3ah88t5d9ue51n1a5l5e4@group.calendar.google.com&color=%23B1440E&",
-  cal_5 : "src=email.nchu.edu.tw_5ror2k98ics8okjs6d5kvd2h88@group.calendar.google.com&color=%23B1440E&",
-  cal_6 : "src=email.nchu.edu.tw_qgo0r638m2oof342e1ak0k76ks@group.calendar.google.com&color=%23B1440E&",
-  cal_7 : "src=email.nchu.edu.tw_coerb69lquagpvcvrr6ljlb85k@group.calendar.google.com&color=%23B1440E&"
-};
+var mult_cal = {};
+
+mult_cal.get_src = function (cal_no) {
+
+  var cal_list = {
+    cal_1 : "src=email.nchu.edu.tw_g97uemkjpt68d8su5g8dsjnbi0@group.calendar.google.com&color=%23B1440E&",
+    cal_2 : "src=email.nchu.edu.tw_0er204ue8p81vfe22vn1qja6k0@group.calendar.google.com&color=%23B1440E&",
+    cal_3 : "src=email.nchu.edu.tw_kgjoa8u95tpju1vcclic8lqpv0@group.calendar.google.com&color=%23B1440E&",
+    cal_4 : "src=email.nchu.edu.tw_gfisp3ah88t5d9ue51n1a5l5e4@group.calendar.google.com&color=%23B1440E&",
+    cal_5 : "src=email.nchu.edu.tw_5ror2k98ics8okjs6d5kvd2h88@group.calendar.google.com&color=%23B1440E&",
+    cal_6 : "src=email.nchu.edu.tw_qgo0r638m2oof342e1ak0k76ks@group.calendar.google.com&color=%23B1440E&",
+    cal_7 : "src=email.nchu.edu.tw_coerb69lquagpvcvrr6ljlb85k@group.calendar.google.com&color=%23B1440E&"      
+  };
+
+  return cal_list[cal_no];
+}
 
 
 $('.cal').click(function() {
@@ -14,7 +21,7 @@ $('.cal').click(function() {
   var mainSrc, calRef, calNo;
   mainSrc = $('#calendar').attr('src').replace('ctz=Asia/Taipei', '');
   calNo = $(this).attr('mult-cal');
-  calRef = cal_list[calNo];
+  calRef = mult_cal.get_src(calNo);
 
 
   if ($(this).hasClass('btn-success')) {
@@ -60,7 +67,7 @@ $('#cal_choose_all').click(function() {
     }  
 
     calNo   = $(this).attr('mult-cal');
-    calRef  = cal_list[calNo];
+    calRef  = mult_cal.get_src(calNo);
     mainSrc = mainSrc + calRef;
   });
   
