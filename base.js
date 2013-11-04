@@ -15,66 +15,70 @@ mult_cal.get_src = function (cal_no) {
   return cal_list[cal_no];
 }
 
+mult_cal.construct = function() {
+  $('.cal').click(function() {
 
-$('.cal').click(function() {
-
-  var mainSrc, calRef, calNo;
-  mainSrc = $('#calendar').attr('src').replace('ctz=Asia/Taipei', '');
-  calNo = $(this).attr('mult-cal');
-  calRef = mult_cal.get_src(calNo);
-
-
-  if ($(this).hasClass('btn-success')) {
-    mainSrc = mainSrc.replace(calRef, '');
-    $(this).removeClass('btn-success');
-    $(this).addClass('btn-default');  
-  }
-  else {
-    mainSrc = mainSrc + calRef;
-    $(this).removeClass('btn-default');
-    $(this).addClass('btn-success');  
-  }
-
-  mainSrc = mainSrc + 'ctz=Asia/Taipei';
-  
-  $('#calendar').attr('src', mainSrc);
-  
-  
-});
+    var mainSrc, calRef, calNo;
+    mainSrc = $('#calendar').attr('src').replace('ctz=Asia/Taipei', '');
+    calNo = $(this).attr('mult-cal');
+    calRef = mult_cal.get_src(calNo);
 
 
-$('#cal_cancel_all').click(function() {
-  $('#calendar').attr('src','https://www.google.com/calendar/embed?ctz=Asia/Taipei');
-
-  $('.cal').each(function(){
     if ($(this).hasClass('btn-success')) {
+      mainSrc = mainSrc.replace(calRef, '');
       $(this).removeClass('btn-success');
       $(this).addClass('btn-default');  
-    } 
-  });
-
-});
-
-$('#cal_choose_all').click(function() {
-  
-  var mainSrc, calNo, calRef;
-  mainSrc = 'https://www.google.com/calendar/embed?';
-  
-  $('.cal').each(function(){
-    if ($(this).hasClass('btn-default')) {
+    }
+    else {
+      mainSrc = mainSrc + calRef;
       $(this).removeClass('btn-default');
       $(this).addClass('btn-success');  
-    }  
+    }
 
-    calNo   = $(this).attr('mult-cal');
-    calRef  = mult_cal.get_src(calNo);
-    mainSrc = mainSrc + calRef;
+    mainSrc = mainSrc + 'ctz=Asia/Taipei';
+    
+    $('#calendar').attr('src', mainSrc);
+    
+    
   });
-  
-  mainSrc = mainSrc + 'ctz=Asia/Taipei';
-  
-  $('#calendar').attr('src', mainSrc);
-});
+
+
+  $('#cal_cancel_all').click(function() {
+    $('#calendar').attr('src','https://www.google.com/calendar/embed?ctz=Asia/Taipei');
+
+    $('.cal').each(function(){
+      if ($(this).hasClass('btn-success')) {
+        $(this).removeClass('btn-success');
+        $(this).addClass('btn-default');  
+      } 
+    });
+
+  });
+
+  $('#cal_choose_all').click(function() {
+    
+    var mainSrc, calNo, calRef;
+    mainSrc = 'https://www.google.com/calendar/embed?';
+    
+    $('.cal').each(function(){
+      if ($(this).hasClass('btn-default')) {
+        $(this).removeClass('btn-default');
+        $(this).addClass('btn-success');  
+      }  
+
+      calNo   = $(this).attr('mult-cal');
+      calRef  = mult_cal.get_src(calNo);
+      mainSrc = mainSrc + calRef;
+    });
+    
+    mainSrc = mainSrc + 'ctz=Asia/Taipei';
+    
+    $('#calendar').attr('src', mainSrc);
+  });
+}
+
+
+mult_cal.construct();
 
 
 
