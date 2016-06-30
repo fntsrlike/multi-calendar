@@ -1,4 +1,4 @@
-multi-calendar
+Multi Calendar
 ==============
 
-use AJAX to change which calendar do you want to display on your site.
+Use AJAX to change which calendar do you want to display on your site.
